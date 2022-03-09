@@ -8,6 +8,7 @@
     }
 
     function onReady(smart)  {
+      debugger;
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
@@ -21,7 +22,7 @@
                       }
                     }
                   });
-
+        debugger;
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -41,7 +42,7 @@
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
-
+          debugger;
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
@@ -68,11 +69,13 @@
     }
 
     FHIR.oauth2.ready(onReady, onError);
+    debugger;
     return ret.promise();
 
   };
 
   function defaultPatient(){
+    debugger;
     return {
       fname: {value: ''},
       lname: {value: ''},
@@ -99,7 +102,7 @@
         formattedBPObservations.push(observation);
       }
     });
-
+    debugger;
     return getQuantityValueAndUnit(formattedBPObservations[0]);
   }
 
@@ -108,6 +111,7 @@
         typeof ob.valueQuantity != 'undefined' &&
         typeof ob.valueQuantity.value != 'undefined' &&
         typeof ob.valueQuantity.unit != 'undefined') {
+          debugger;
           return ob.valueQuantity.value + ' ' + ob.valueQuantity.unit;
     } else {
       return undefined;
